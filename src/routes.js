@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { sellSingleTicket, sellBulkTicket, findAll, findById, findByUsername } = require('./controllers');
+const { sellSingleTicket, sellBulkTicket, findAll, findById, findByUsername, updateById, updateByUsername } = require('./controllers');
 
 
  
@@ -7,13 +7,13 @@ const { sellSingleTicket, sellBulkTicket, findAll, findById, findByUsername } = 
 // router.put('/t/:id');
 // router.delete('/t/:id');
 
-router.route('/t/:id').get(findById).put().delete();
+router.route('/t/:id').get(findById).put(updateById).delete();
 
 // router.get('/u/:username');
 // router.put('/u/:username');
 // router.delete('/u/:username');
 
-router.route('/u/:username').get(findByUsername).put().delete();
+router.route('/u/:username').get(findByUsername).put(updateByUsername).delete();
 
 router.post('/bulk', sellBulkTicket);
 router.get('/draw');
