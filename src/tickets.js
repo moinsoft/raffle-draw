@@ -8,11 +8,8 @@ const tickets = Symbol('tickets')
 class TicketCollection {
   constructor() {
     (async function () {
-      // const data = await readFile();
-      // this[tickets] = data;
-
       this[tickets] = await readFile();
-    }.bind(this));
+    }.call(this));
   }
 
 
@@ -36,7 +33,7 @@ class TicketCollection {
    * @param {number} price 
    * @param {number} quantity 
    * @return {Ticket[]}
-   */
+  */
   createBulk(username, price, quantity) {
     const result = []
     for (let i = 0; i < quantity; i++) {
@@ -80,7 +77,7 @@ class TicketCollection {
    * @return {Ticket[]}
   */
   findByUsername(username) {
-    const ticket = this[tickets].filter(
+    const tickets = this[tickets].filter(
       /**
        * @param {Ticket} ticket
       */
@@ -112,7 +109,7 @@ class TicketCollection {
    * @param {string} username 
    * @param {{username: string, price: number}} ticketBody
    * @return {Ticket[]}
-   */
+  */
   updateBulk(username, ticketBody) {
     const userTickets = this.findByUsername(username)
     const updatedTickets = userTickets.map(
